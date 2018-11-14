@@ -1,3 +1,3 @@
 <?php 
-	define ("BASEURL", "http://localhost/mvc2");
+	define ("BASEURL", "http://localhost/criadordeprovamvc/");
  ?>
