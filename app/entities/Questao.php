@@ -53,14 +53,14 @@ class Questao{
 	{
 		return $this->alternativaD = $alternativaD;
 	}
-	public function getAlternativarCorreta()
+	public function getAlternativaCorreta()
 	{
-		return $this->alternativarCorreta;
+		return $this->alternativaCorreta;
 	}
 	
-	public function setAlternativarCorreta($alternativarCorreta)
+	public function setAlternativaCorreta($alternativaCorreta)
 	{
-		return $this->alternativarCorreta = $alternativarCorreta;
+		return $this->alternativaCorreta = $alternativaCorreta;
 	}
 }
 ?>

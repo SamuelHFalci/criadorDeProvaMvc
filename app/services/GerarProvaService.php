@@ -1,6 +1,6 @@
 <?php 
 namespace app\services;
-	class GerarProvaService{
+	class GerarProvaService extends ServiceDefault{
 
 	}
  ?>
