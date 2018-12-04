@@ -7,6 +7,7 @@ class Questao{
 	private $alternativaC;
 	private $alternativaD;
 	private $alternativaCorreta;
+	private $categoria;
 
 	public function getEnunciado()
 	{
@@ -62,5 +63,15 @@ class Questao{
 	{
 		return $this->alternativaCorreta = $alternativaCorreta;
 	}
+	public function getCategoria()
+	{
+	    return $this->categoria;
+	}
+	 
+	public function setCategoria($categoria)
+	{
+	    $this->categoria = $categoria;
+	}
+	
 }
 ?>

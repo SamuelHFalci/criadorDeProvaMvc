@@ -11,12 +11,31 @@ class QuestaoService extends ServiceDefault{
 			echo 'Error: ' . $e->getMessage();
 		}
 	}
+	public function getCategorias(){
+		try{
+			$stmt = $this->conexao->prepare('SELECT * FROM categoria');
+			$stmt->execute();
+			return $stmt->fetchAll(); 
+		} catch(PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
+	public function getByCategoria($categoria){
+		try{
+			$stmt = $this->conexao->prepare("SELECT * FROM questao WHERE categoria = '{$categoria}'");
+			$stmt->execute();
+			return $stmt->fetchAll(); 
+		} catch(PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
 
 	public function cadastrar($questao){
-		echo "teste";
-		var_dump($questao);
+		$categoria = (int) $questao->getCategoria();
+		echo $categoria;
+		
 		try {
-			$sql = "INSERT INTO questao SET enunciado = :enunciado, alternativaA = :alternativaA, alternativaB = :alternativaB, alternativaC = :alternativaC, alternativaD = :alternativaD, alternativaCorreta = :alternativaCorreta";
+			$sql = "INSERT INTO questao SET enunciado = :enunciado, alternativaA = :alternativaA, alternativaB = :alternativaB, alternativaC = :alternativaC, alternativaD = :alternativaD, alternativaCorreta = :alternativaCorreta, categoria = :categoria";
 			$query = $this->conexao->prepare($sql);
 			$query->bindValue(":enunciado", $questao->getEnunciado());
 			$query->bindValue(":alternativaA", $questao->getAlternativaA());
@@ -24,6 +43,7 @@ class QuestaoService extends ServiceDefault{
 			$query->bindValue(":alternativaC", $questao->getAlternativaC());
 			$query->bindValue(":alternativaD", $questao->getAlternativaD());
 			$query->bindValue(":alternativaCorreta", $questao->getAlternativaCorreta());
+			$query->bindValue(":categoria", $categoria);
 			$query->execute();
 			return $this->conexao->lastInsertId();
 		} catch (Exception $e) {

@@ -15,13 +15,25 @@ class Controller{
 	}
 
 	public function index(){
-		$data = $this->service->listar();
-		$this->ver($data);
+		
+		if(isset($_POST['categoria'])){
+			
+			$data['dados'] = $this->service->getByCategoria($_POST['categoria']);
+			$data['categorias']  = $this->service->getCategorias();
+			$this->load("layout/header");
+			$this->load("layout/index", $data);
+			$this->load("layout/footer");
+			
+		}else{
+			$data['categorias'] = $this->service->getCategorias();
+			$this->ver($data);
+		}
+		
 	}
 	public function ver($data){
 		$this->load("layout/header");
 		$this->load("layout/index", $data);
-		$this->load("layout/header");
+		$this->load("layout/footer");
 	}
 }
 

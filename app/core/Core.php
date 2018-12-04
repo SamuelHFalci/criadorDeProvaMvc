@@ -9,20 +9,31 @@ class Core{
 	}
 
 	public function run(){
-		
-		if(class_exists($this->controller)){
-			$c = new $this->controller();
-			if($this->metodo){
-				$m = $this->metodo;
-				$c->$m();
+		session_start();
+		if(isset($_SESSION['logado'])){
+			if(class_exists($this->controller)){
+				$c = new $this->controller();
+				if($this->metodo){
+					$m = $this->metodo;
+					if($this->parametros){
+						$c->$m($this->parametros);	
+					}else{
+						$c->$m();	
+					}
+					
+				}else{
+					$c->index();
+				}	
 			}else{
+				$this->controller = "app\\controllers\\Controller";
+				$c = new $this->controller();
 				$c->index();
-			}	
+			}
 		}else{
-			$this->controller = "app\\controllers\\Controller";
-			$c = new $this->controller();
-			$c->index();
-		}
+			$c = new app\controllers\LoginController();
+			$c->login();
+		}	
+		
 	}
 	public function extractUrl(){
 		$url = $_SERVER["REQUEST_URI"];
